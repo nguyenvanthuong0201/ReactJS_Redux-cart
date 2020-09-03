@@ -1,0 +1,13 @@
+/* YOUR CUSTOM STYLES */
+*{
+    padding: 0;
+    margin: 0;
+}
+
+nav.navbar.fixed-top.navbar-toggleable-md.navbar-expand-lg.navbar-light.scrolling-navbar {
+    background-color: cadetblue;
+}
+
+main#mainContainer {
+    margin-top: 100px;
+}
