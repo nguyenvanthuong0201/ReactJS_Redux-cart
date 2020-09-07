@@ -1,40 +1,69 @@
 import React, { Component } from "react";
+import *as Message from "../constants/Messages";
 
 class CartItem extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      quantity: 1,
+    }
+  }
+  onUpdateCart = (product,quantity) =>{
+    if(quantity > 0){
+      this.setState({
+        quantity:quantity
+      })
+      this.props.onUpdateCart(product,quantity)
+      this.props.onUpdateMessage(Message.MSG_UPDATE_CARD_SUCCESS)
+    }
+  }
+  
+  onDelete=(product)=>{
+    this.props.onDeleteCart(product)
+    this.props.onDeleteMessage(Message.MSG_DELETE_CARD_SUCCESS)
+  }
+  sum=(quantity,price)=>{
+      return quantity*price
+  }
   render() {
+    let { item ,onUpdateCart } = this.props;
+    let { quantity } = this.state;
+    console.log(quantity)
     return (
       <tr>
-        <th scope="row">
+        <td scope="row">
           <img
-            src="https://store.storeimages.cdn-apple.com/4974/as-images.apple.com/is/image/AppleInc/aos/published/images/H/H0/HH0H2/HH0H2?wid=445&hei=445&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=K7ik72"
+            src={item.product.image}
             alt=""
             className="img-fluid z-depth-0"
           />
-        </th>
+        </td>
         <td>
           <h5>
-            <strong>Iphone 6 Plus</strong>
+            <strong>{item.product.name}</strong>
           </h5>
         </td>
-        <td>15$</td>
+        <td>{item.product.price}$</td>
         <td className="center-on-small-only">
-          <span className="qty">1 </span>
+          <span className="qty">{item.quantity}</span>
           <div className="btn-group radio-group" data-toggle="buttons">
             <label
               className="btn btn-sm btn-primary
-                        btn-rounded waves-effect waves-light"
+             btn-rounded waves-effect waves-light"
+             onClick={()=> this.onUpdateCart(item.product,item.quantity - 1)}
             >
               <a>—</a>
             </label>
             <label
               className="btn btn-sm btn-primary
-                        btn-rounded waves-effect waves-light"
+            btn-rounded waves-effect waves-light"
+            onClick={()=> this.onUpdateCart(item.product,item.quantity + 1)}
             >
               <a>+</a>
             </label>
           </div>
         </td>
-        <td>15$</td>
+        <td>{this.sum(item.quantity, item.product.price)}$</td>
         <td>
           <button
             type="button"
@@ -43,6 +72,7 @@ class CartItem extends Component {
             data-placement="top"
             title=""
             data-original-title="Remove item"
+            onClick={()=>this.onDelete(item.product)}
           >
             X
           </button>

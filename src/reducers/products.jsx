@@ -5,7 +5,8 @@ let initialState=[
         image:"/images/phone4.png",
         description:"Sản phầm này do Apple sản xuất",
         price:500,
-        inventory:10
+        inventory:10,
+        rating:5,
     },
     {
         id:2,
@@ -13,7 +14,8 @@ let initialState=[
         image:"/images/phone2.png",
         description:"Sản phầm này do Oppo sản xuất",
         price:600,
-        inventory:15
+        inventory:15,
+        rating:4,
     },
     {
         id:3,
@@ -21,7 +23,8 @@ let initialState=[
         image:"/images/phone3.png",
         description:"Sản phầm này do SamSung sản xuất",
         price:800,
-        inventory:4
+        inventory:4,
+        rating:2,
     },
 ]
 const products =(state=initialState,action)=>{
@@ -29,4 +32,4 @@ const products =(state=initialState,action)=>{
         default: return[...state];
     }
 }
-export default products
+export default products 
